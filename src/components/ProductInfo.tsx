@@ -27,24 +27,28 @@ function ProductInfo() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center">
-      <div
-        className="card  w-96 shadow-xl   rounded-md bg-transparent border border-neutral-700
-"
-      >
-        {product?.thumbnail && (
-          <figure>
-            <img src={product.thumbnail} alt={product.title} />
-          </figure>
-        )}
-        <div className="card-body">
-          <h2 className="card-title text-lg font-semibold">{product.title}</h2>
-          <p className="text-sm text-gray-400 leading-relaxed">
-            {product.description}
-          </p>
-          <div className="card-actions flex-col items-end  ">
-            <button className="btn btn-info">${product.price}</button>
-            <span className="text-xs px-2">{product?.availabilityStatus}</span>
+    <div className="w-full min-h-screen flex flex-col items-center justify-center px-3 py-6 sm:py-10">
+      {/* <div className="w-full min-h-screen flex flex-col items-center justify-start sm:justify-center px-3 py-6 sm:py-0"> */}
+      <div className="w-full max-w-sm mx-auto">
+        <div className="card w-full shadow-2xl rounded-md bg-transparent border border-neutral-700">
+          {product?.thumbnail && (
+            <figure>
+              <img src={product.thumbnail} alt={product.title} />
+            </figure>
+          )}
+          <div className="card-body ">
+            <h2 className="card-title text-lg font-semibold">
+              {product.title}
+            </h2>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              {product.description}
+            </p>
+            <div className="card-actions flex-col items-end  ">
+              <button className="btn btn-primary">${product.price}</button>
+              <span className="text-xs px-2">
+                {product?.availabilityStatus}
+              </span>
+            </div>
           </div>
         </div>
       </div>

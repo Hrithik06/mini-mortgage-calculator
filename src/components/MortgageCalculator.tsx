@@ -52,14 +52,6 @@ export default function MortgageCalculator() {
     totalInterestCalc = emi * totalLoanTenure - loanAmount;
   }
   const income = Number(monthlyIncome);
-  let eligibilityMessage = "Enter income to check eligibility";
-
-  if (income > 0 && emi > 0) {
-    eligibilityMessage =
-      emi <= income * 0.4
-        ? "You are eligible for this loan"
-        : "Loan amount exceeds your eligibility";
-  }
 
   const formatCurrency = (value: number) =>
     Math.round(value).toLocaleString("en-US", {
@@ -67,6 +59,7 @@ export default function MortgageCalculator() {
       currency: "USD",
       maximumFractionDigits: 0,
     });
+  const isEligible = monthlyIncome && emi <= Number(monthlyIncome) * 0.4;
 
   useEffect(() => {
     setMonthlyEMI(Math.round(emi));
@@ -74,9 +67,12 @@ export default function MortgageCalculator() {
   }, [propertyPrice, downPayment, interestRate, tenureYears, tenuremonths]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center">
-      <main>
-        <div className="w-xl border border-base-300 rounded-md p-4 ">
+    // <div className="w-full min-h-screen flex flex-col items-center justify-center ">
+    //   <main>
+    //     <div className="w-xl border border-base-300 rounded-md p-4 shadow-2xl ">
+    <div className="w-full min-h-screen px-3 py-6 sm:py-10">
+      <main className="max-w-xl mx-auto">
+        <div className="border border-base-300 rounded-xl p-4 sm:p-6 shadow-2xl">
           <fieldset className="fieldset ">
             <p className="fieldset-legend text-3xl">
               Simple Mortgage Calculator
@@ -205,13 +201,29 @@ export default function MortgageCalculator() {
             <p className="my-2">
               Total Interest: {formatCurrency(totalInterest)}
             </p>
-            <p className="my-2">{eligibilityMessage}</p>
+
+            {!monthlyIncome && (
+              <div className="alert alert-info mt-4">
+                <span>Enter income to check eligibility</span>
+              </div>
+            )}
+
+            {monthlyIncome && (
+              <div
+                className={`alert mt-4 ${
+                  isEligible ? "alert-success" : "alert-error"
+                }`}
+              >
+                <span>
+                  {isEligible
+                    ? "✅ You are eligible for this loan"
+                    : "⚠️ Loan amount exceeds your eligibility"}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </main>
     </div>
   );
 }
-// bg-base-200 border-base-300 rounded-box border p-4 w-xl text-xl
-
-// bg-base-200 border-base-300 rounded-box w-xl border p-4

@@ -12,5 +12,6 @@
 } */
 
 @plugin "daisyui" {
-    themes: light --default, black --prefersdark, cupcake;
+    themes: cupcake --default;
+    /* , dark --prefersdark, cupcake; */
 }
