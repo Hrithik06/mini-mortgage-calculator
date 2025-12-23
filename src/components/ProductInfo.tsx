@@ -43,7 +43,7 @@ function ProductInfo() {
             {product.description}
           </p>
           <div className="card-actions flex-col items-end  ">
-            <span className="badge badge-primary p-4">${product.price}</span>
+            <button className="btn btn-info">${product.price}</button>
             <span className="text-xs px-2">{product?.availabilityStatus}</span>
           </div>
         </div>
