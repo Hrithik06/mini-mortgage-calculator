@@ -28,7 +28,10 @@ function ProductInfo() {
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center">
-      <div className="card bg-base-200 w-96 shadow-md">
+      <div
+        className="card  w-96 shadow-xl   rounded-md bg-transparent border border-neutral-700
+"
+      >
         {product?.thumbnail && (
           <figure>
             <img src={product.thumbnail} alt={product.title} />

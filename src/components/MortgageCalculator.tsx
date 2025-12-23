@@ -76,8 +76,8 @@ export default function MortgageCalculator() {
   return (
     <div className="w-full min-h-screen flex flex-col items-center justify-center">
       <main>
-        <div className="">
-          <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xl border p-4">
+        <div className="w-xl border border-base-300 rounded-md p-4 ">
+          <fieldset className="fieldset ">
             <p className="fieldset-legend text-3xl">
               Simple Mortgage Calculator
             </p>
@@ -195,7 +195,7 @@ export default function MortgageCalculator() {
               </label>
             </div>
           </fieldset>
-          <div className="bg-base-200 border-base-300 rounded-box border p-4 w-xl text-xl">
+          <div className="text-xl">
             <p className="my-2">
               Your monthly payable EMI will be{" "}
               <span className="text-3xl underline">
@@ -212,3 +212,6 @@ export default function MortgageCalculator() {
     </div>
   );
 }
+// bg-base-200 border-base-300 rounded-box border p-4 w-xl text-xl
+
+// bg-base-200 border-base-300 rounded-box w-xl border p-4
