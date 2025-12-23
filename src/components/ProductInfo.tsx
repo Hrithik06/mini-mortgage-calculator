@@ -1,0 +1,49 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+function ProductInfo() {
+  const [product, setProduct] = useState<any>(null);
+  const [loadingProduct, setLoadingProduct] = useState(true);
+
+  const getProduct = async () => {
+    try {
+      const res = await fetch("https://dummyjson.com/products/1");
+      const data = await res.json();
+      setProduct(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoadingProduct(false);
+    }
+  };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+
+  if (loadingProduct) {
+    return <p className="text-center mt-10">Loading product...</p>;
+  }
+
+  return (
+    <div className="w-full flex justify-center mt-10">
+      <div className="card bg-base-200 w-96 shadow-md">
+        {product?.thumbnail && (
+          <figure>
+            <img src={product.thumbnail} alt={product.title} />
+          </figure>
+        )}
+        <div className="card-body">
+          <h2 className="card-title">{product.title}</h2>
+          <p className="text-sm text-gray-400">{product.description}</p>
+          <div className="card-actions justify-end">
+            <span className="badge badge-primary">${product.price}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default ProductInfo;
