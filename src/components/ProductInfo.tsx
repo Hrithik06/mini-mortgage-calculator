@@ -27,7 +27,7 @@ function ProductInfo() {
   }
 
   return (
-    <div className="w-full flex justify-center mt-10">
+    <div className="w-full min-h-screen flex flex-col items-center justify-center">
       <div className="card bg-base-200 w-96 shadow-md">
         {product?.thumbnail && (
           <figure>
@@ -35,10 +35,13 @@ function ProductInfo() {
           </figure>
         )}
         <div className="card-body">
-          <h2 className="card-title">{product.title}</h2>
-          <p className="text-sm text-gray-400">{product.description}</p>
-          <div className="card-actions justify-end">
-            <span className="badge badge-primary">${product.price}</span>
+          <h2 className="card-title text-lg font-semibold">{product.title}</h2>
+          <p className="text-sm text-gray-400 leading-relaxed">
+            {product.description}
+          </p>
+          <div className="card-actions flex-col items-end  ">
+            <span className="badge badge-primary p-4">${product.price}</span>
+            <span className="text-xs px-2">{product?.availabilityStatus}</span>
           </div>
         </div>
       </div>
