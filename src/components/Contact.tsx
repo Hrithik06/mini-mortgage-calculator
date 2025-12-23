@@ -1,11 +1,13 @@
 "use client";
+import { useState } from "react";
 export default function Contact() {
+  const [statusMessage, setStatusMessage] = useState("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const form = e.currentTarget; // ✅ capture early
-
+    const form = e.currentTarget;
     const formData = new FormData(form);
-    console.log(formData.get("name"));
+
     const payload = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -14,11 +16,19 @@ export default function Contact() {
       monthlySalary: formData.get("monthlySalary"),
     };
 
-    await fetch("/api/contact", {
+    const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setStatusMessage(data?.message);
+    } else {
+      setStatusMessage("Something went wrong");
+    }
 
     form.reset();
   };
@@ -30,7 +40,6 @@ export default function Contact() {
       >
         <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
           <legend className="fieldset-legend text-2xl">Contact</legend>
-
           <label className="label" htmlFor="nameInput">
             Name
           </label>
@@ -43,7 +52,6 @@ export default function Contact() {
             id="nameInput"
           />
           <p className="validator-hint">Name is required</p>
-
           <label className="label" htmlFor="emailInput">
             Email
           </label>
@@ -100,10 +108,12 @@ export default function Contact() {
             placeholder="10000"
           />
           <p className="validator-hint">Enter a numeric value</p>
-
           <button className="btn btn-primary mt-4">Submit</button>
         </fieldset>
       </form>
+      {statusMessage && (
+        <p className="text-sm text-green-500 mt-2">{statusMessage}</p>
+      )}
     </div>
   );
 }
