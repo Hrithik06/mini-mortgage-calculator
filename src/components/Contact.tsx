@@ -26,6 +26,7 @@ export default function Contact() {
 
     if (res.ok) {
       setStatusMessage(data?.message);
+      console.log("Response from api: ", data);
     } else {
       setStatusMessage("Something went wrong");
     }
